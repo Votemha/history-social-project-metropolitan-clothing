@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.9c223942.css",
-    "main.js": "/static/js/main.a2236c33.js",
-    "index.html": "/index.html",
-    "main.9c223942.css.map": "/static/css/main.9c223942.css.map",
-    "main.a2236c33.js.map": "/static/js/main.a2236c33.js.map"
+    "main.css": "/history-social-project-metropolitan-clothing/static/css/main.9c223942.css",
+    "main.js": "/history-social-project-metropolitan-clothing/static/js/main.a2236c33.js",
+    "index.html": "/history-social-project-metropolitan-clothing/index.html",
+    "main.9c223942.css.map": "/history-social-project-metropolitan-clothing/static/css/main.9c223942.css.map",
+    "main.a2236c33.js.map": "/history-social-project-metropolitan-clothing/static/js/main.a2236c33.js.map"
   },
   "entrypoints": [
     "static/css/main.9c223942.css",
