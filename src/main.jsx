@@ -111,6 +111,41 @@ const workerCards = [
   },
 ];
 
+const costumeProfiles = [
+  {
+    group: "Рабочий",
+    marker: "практичность",
+    description:
+      "Костюм строился вокруг физического труда: прочная рубаха, плотные штаны, сапоги и тёмная верхняя одежда.",
+    pieces: ["Косоворотка", "Плотные штаны", "Сапоги", "Картуз"],
+    signal: "Связь с крестьянской традицией и постепенное вхождение в городскую среду.",
+  },
+  {
+    group: "Ремесленник",
+    marker: "мастерская",
+    description:
+      "Одежда оставалась удобной для работы, но чаще включала жилет, пиджак или аккуратную рубашку.",
+    pieces: ["Рубаха", "Жилет", "Фартук", "Кожаная обувь"],
+    signal: "Костюм показывал профессию, самостоятельность и устойчивое место в городском быту.",
+  },
+  {
+    group: "Мещанин",
+    marker: "городской вид",
+    description:
+      "Внешний облик сильнее ориентировался на городскую норму: фабричные ткани, пиджак и более аккуратный крой.",
+    pieces: ["Пиджак", "Жилет", "Брюки", "Шляпа или картуз"],
+    signal: "Через одежду подчёркивались достаток, приличие и принадлежность к городской культуре.",
+  },
+  {
+    group: "Рыночный бедняк",
+    marker: "изношенность",
+    description:
+      "Гардероб собирался из старых, купленных с рук или перешитых вещей, поэтому главным признаком становилась степень износа.",
+    pieces: ["Заплаты", "Старое пальто", "Разношенная обувь", "Платок"],
+    signal: "Вещи показывали бедность, вторичный оборот одежды и зависимость от дешёвых рынков.",
+  },
+];
+
 const sourceEntries = [
   {
     title: "К. В. Ермакова - «Костюм в повседневной жизни москвичей второй половины XIX в.»",
@@ -141,20 +176,6 @@ const sourceEntries = [
       "описание одежды ремесленников, купцов, рабочих",
   },
   {
-    title: "Мода 1900-х годов",
-    type: "Википедия",
-    href: "https://ru.wikipedia.org/wiki/Мода_1900-х_годов",
-    summary:
-      "описывает одежду рабочих: косоворотки, картузы, сапоги, поддевки",
-  },
-  {
-    title: "Мода 1910-х годов - рабочая одежда",
-    type: "Википедия",
-    href: "https://ru.wikipedia.org/wiki/Мода_1910-х_годов",
-    summary:
-      "показывает смешение народной и городской одежды у рабочих",
-  },
-  {
     title: "Очерки русской культуры XVIII века - одежда городских жителей",
     type: "Statehistory",
     href: "https://statehistory.ru/books/pod-red--B-A--Rybakova_Ocherki-russkoy-kultury-XVIII-veka--CHast-pervaya-/19",
@@ -171,7 +192,7 @@ const sourceEntries = [
   {
     title: "Материальная культура русского города",
     type: "Rusarch",
-    href: "https://rusarch.ru/rabinovich4.htm",
+    href: "http://rusarch.ru/rabinovich4.htm",
     summary:
       "фрагменты работ по быту городского населения",
   },
@@ -199,7 +220,7 @@ const sourceEntries = [
   {
     title: "Мода и идентичность в русском городе (конец XVIII - первая половина XIX века)",
     type: "IRI RAN",
-    href: "https://ebookiriran.ru/index.php?id=52&section=8&view=article",
+    href: "https://iriran.ru/people/kupriyanov-aleksandr-ivanovich",
     summary:
       "исследование о том, как одежда отражала социальное положение жителей города",
   },
@@ -210,14 +231,60 @@ const sourceEntries = [
     summary:
       "статья о распространении городской одежды и фабричных тканей среди населения",
   },
-  {
-    title: "Мода 1910-х годов: рабочая одежда",
-    type: "Википедия",
-    href: "https://ru.wikipedia.org/wiki/Мода_1910-х_годов",
-    summary:
-      "описание одежды рабочих (косоворотки, штаны, сапоги, картузы) и сочетания деревенского и городского костюма",
-  },
 ];
+
+function CostumeBuilder() {
+  const [selectedProfile, setSelectedProfile] = useState(0);
+  const profile = costumeProfiles[selectedProfile];
+
+  return (
+    <section className="costume-lab section-block">
+      <div className="section-head">
+        <p className="eyebrow">Интерактивный блок</p>
+        <h2>Соберите образ городского жителя</h2>
+      </div>
+
+      <div className="costume-lab-grid">
+        <div className="costume-tabs" role="tablist" aria-label="Социальная группа">
+          {costumeProfiles.map((item, index) => (
+            <button
+              key={item.group}
+              className={selectedProfile === index ? "costume-tab active" : "costume-tab"}
+              onClick={() => setSelectedProfile(index)}
+              type="button"
+              role="tab"
+              aria-selected={selectedProfile === index}
+            >
+              <span>{item.group}</span>
+              <strong>{item.marker}</strong>
+            </button>
+          ))}
+        </div>
+
+        <article className="costume-preview">
+          <div className="costume-figure" aria-hidden="true">
+            <div className="costume-headwear">{profile.pieces[3]}</div>
+            <div className="costume-body">{profile.pieces[0]}</div>
+            <div className="costume-waist">{profile.pieces[1]}</div>
+            <div className="costume-shoes">{profile.pieces[2]}</div>
+          </div>
+
+          <div className="costume-copy">
+            <p className="feature-lead">{profile.marker}</p>
+            <h3>{profile.group}</h3>
+            <p>{profile.description}</p>
+            <div className="piece-list" aria-label="Элементы костюма">
+              {profile.pieces.map((piece) => (
+                <span key={piece}>{piece}</span>
+              ))}
+            </div>
+            <p className="costume-signal">{profile.signal}</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  );
+}
 
 function getPageFromHash() {
   const currentHash = window.location.hash || "#/";
@@ -309,6 +376,8 @@ function HomePage() {
           </article>
         ))}
       </section>
+
+      <CostumeBuilder />
 
       <section className="section-block">
         <div className="section-head">
