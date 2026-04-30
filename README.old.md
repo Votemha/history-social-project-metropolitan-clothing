@@ -1,1 +1,0 @@
-# history-social-project-metropolitan-clothing
